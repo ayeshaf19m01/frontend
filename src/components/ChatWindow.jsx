@@ -35,7 +35,7 @@ const ChatWindow = ({ userId, vendorId, chatId }) => {
 
     const fetchMessages = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/chat/${chatId}/messages`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/chat/${chatId}/messages`);
         const data = await res.json();
         setMessages(data);
         socket.emit('markSeen', { chatId, userId });
@@ -77,14 +77,14 @@ const ChatWindow = ({ userId, vendorId, chatId }) => {
 
     try {
       // // ✅ Save message to DB
-      await fetch(`http://localhost:5000/api/chat/${chatId}/message`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/chat/${chatId}/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           chatId,
           sender: userId,
           content: input,
-          receiver: vendorId,
+          vendorId,
         }
         ),
       });

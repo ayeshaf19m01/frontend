@@ -32,7 +32,7 @@ const VendorProfileEditable = ({ vendorId: propVendorId }) => {
         return;
       }
       try {
-        const response = await axios.get(`http://localhost:5000/api/vendors/${vendorId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/vendors/${vendorId}`);
         console.log("Vendor API Response:", response.data);
         if (!response.data.data) {
           throw new Error("Vendor not found");
@@ -99,7 +99,7 @@ const VendorProfileEditable = ({ vendorId: propVendorId }) => {
         formDataToSend.append("logo", formData.logo);
       }
 
-      const response = await axios.put(`http://localhost:5000/api/vendors/${vendorId}/details`, formDataToSend, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/vendors/${vendorId}/details`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -167,7 +167,7 @@ const VendorProfileEditable = ({ vendorId: propVendorId }) => {
                   src={
                     formData.logo instanceof File
                       ? URL.createObjectURL(formData.logo)
-                      : `http://localhost:5000/${vendor.logo.replace(/\\/g, "/")}`
+                      : `${import.meta.env.VITE_API_URL}/${vendor.logo.replace(/\\/g, "/")}`
                   }
                   alt="Vendor Logo"
                   className="rounded-circle img-fluid"

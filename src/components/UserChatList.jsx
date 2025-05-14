@@ -24,7 +24,7 @@ const UserChatList = () => {
 
     const fetchChats = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/chat/user/${userId}`,
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/chat/user/${userId}`,
             
         );
         

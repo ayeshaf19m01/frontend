@@ -14,7 +14,7 @@ const PackagesPage = () => {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingMessage, setBookingMessage] = useState('');
   const [isBooking, setIsBooking] = useState(false);
-  const baseURL = 'http://localhost:5000'; // Base URL for images
+  // const baseURL = 'http://localhost:5000';
 
   const priceRanges = [
     { label: 'All Prices', min: 0, max: Infinity },
@@ -31,7 +31,7 @@ const PackagesPage = () => {
   const fetchPackages = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/packages', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/packages`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -49,7 +49,7 @@ const PackagesPage = () => {
                   if (!service.imageUrl && !service.images?.length) {
                     try {
                       const serviceResponse = await axios.get(
-                        `http://localhost:5000/api/services/${service.serviceId}`,
+                        `${import.meta.env.VITE_API_URL}/api/services/${service.serviceId}`,
                         { headers: { Authorization: `Bearer ${token}` } }
                       );
                       console.log(`Fetched service ${service.serviceId}:`, serviceResponse.data.data); // Debug: Log service data
@@ -101,7 +101,7 @@ const PackagesPage = () => {
       defaultBookingDate.setDate(defaultBookingDate.getDate() + 7);
       defaultBookingDate.setHours(10, 0, 0, 0);
 
-      const response = await axios.post('http://localhost:5000/api/bookings', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/bookings`, {
         packageId: selectedPackage._id,
         bookingDate: defaultBookingDate.toISOString(),
         notes: `Booking for package: ${selectedPackage.name}`

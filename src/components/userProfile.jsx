@@ -98,7 +98,7 @@ const UserProfile = () => {
       }
 
       // Construct permanent URL with cache-busting query
-      const backendUrl = "http://localhost:5000";
+      const backendUrl = `${import.meta.env.VITE_API_URL}`;
       const permanentUrl = avatarPath.startsWith("/")
         ? `${backendUrl}${avatarPath}?t=${Date.now()}`
         : `${backendUrl}/${avatarPath}?t=${Date.now()}`;

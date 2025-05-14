@@ -20,7 +20,7 @@ const VendorLogin = () => {
     setLoading(true);
     
     try {
-      const response = await axios.post('http://localhost:5000/api/vendor/signin', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/vendor/signin`, {
         email: email.toLowerCase().trim(),
         password
       });

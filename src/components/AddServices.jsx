@@ -158,7 +158,7 @@ serviceData.portfolio.forEach(file => formData.append('portfolio', file));
     });
 
     // 4. Add Error Handling for Non-2xx Responses
-    const response = await axios.post('http://localhost:5000/api/services', formData, {
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/services`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
       timeout: 10000 // 10-second timeout
     });

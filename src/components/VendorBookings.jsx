@@ -54,7 +54,7 @@ const VendorBookings = () => {
         throw new Error('No authentication token found');
       }
 
-      const response = await axios.get('http://localhost:5000/api/bookings/vendor-bookings', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings/vendor-bookings`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -88,7 +88,7 @@ const VendorBookings = () => {
       const endpoint = newStatus === 'confirmed' ? 'confirm' : 'cancel';
 
       const response = await axios.patch(
-        `http://localhost:5000/api/bookings/${endpoint}/${bookingId}`,
+        `${import.meta.env.VITE_API_URL}/api/bookings/${endpoint}/${bookingId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

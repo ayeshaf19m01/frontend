@@ -38,7 +38,7 @@ const VendorDashboard = () => {
         }
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        const servicesResponse = await axios.get('http://localhost:5000/api/services/vendor');
+        const servicesResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/services/vendor`);
         setServices(Array.isArray(servicesResponse.data.data) ? servicesResponse.data.data : []);
       } catch (err) {
         if (err.response?.status === 401) {
@@ -72,7 +72,7 @@ const VendorDashboard = () => {
     setIsDeleting(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/services/${deleteServiceId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/services/${deleteServiceId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccessMessage('Service deleted successfully!');
@@ -209,7 +209,7 @@ const VendorDashboard = () => {
                                           <Carousel.Item key={index}>
                                             <Card.Img
                                               variant="top"
-                                              src={`http://localhost:5000${img.url}`}
+                                              src={`${import.meta.env.VITE_API_URL}${img.url}`}
                                               style={{
                                                 height: '200px',
                                                 objectFit: 'cover',

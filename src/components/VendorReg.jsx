@@ -68,7 +68,7 @@ const VendorRegistration = () => {
         formDataToSend.append('logo', logoFile);
       }
 
-      const response = await axios.post('http://localhost:5000/api/vendor/signup', formDataToSend, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/vendor/signup `, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

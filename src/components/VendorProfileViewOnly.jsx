@@ -54,7 +54,7 @@ const VendorProfileViewOnly = () => {
       if (!vendorId) return;
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/vendors/${vendorId}`
+          `${import.meta.env.VITE_API_URL}/api/vendors/${vendorId}`
         );
         console.log("Full vendor response:", response.data); 
         setVendorData(response.data.data);
@@ -74,7 +74,7 @@ const VendorProfileViewOnly = () => {
       
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/services/${serviceId}`
+          `${import.meta.env.VITE_API_URL}/api/services/${serviceId}`
         );
         
         // Properly handle both populated vendor objects and raw IDs
@@ -113,7 +113,7 @@ const VendorProfileViewOnly = () => {
       if (!vendorId) return;
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/services?vendorId=${vendorId}`
+          `${import.meta.env.VITE_API_URL}/api/services?vendorId=${vendorId}`
         );
         setVendorServices(response.data);
       } catch (error) {
@@ -129,7 +129,7 @@ const VendorProfileViewOnly = () => {
     const fetchReviews = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/reviews/${vendorId}`
+          `${import.meta.env.VITE_API_URL}/api/reviews/${vendorId}`
         );
         setReviews(response.data);
       } catch (error) {
@@ -147,7 +147,7 @@ const VendorProfileViewOnly = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/chat/start", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/chat/start`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -206,7 +206,7 @@ const VendorProfileViewOnly = () => {
       setIsSubmitting(true);
 
       const response = await axios.post(
-        "http://localhost:5000/api/reviews",
+        `${import.meta.env.VITE_API_URL}/api/reviews`,
         {
           rating,
           comment,
@@ -390,7 +390,7 @@ const VendorProfileViewOnly = () => {
               >
                 <img
                   className="d-block w-100"
-                  src={`http://localhost:5000${image.url}`}
+                  src={`${import.meta.env.VITE_API_URL}${image.url}`}
                   alt={`Service preview ${index + 1}`}
                   style={{
                     position: "absolute",
@@ -433,7 +433,7 @@ const VendorProfileViewOnly = () => {
                   {specificService.portfolio.map((image, index) => (
                     <Col md={4} key={index} className="mb-3">
                       <img
-                        src={`http://localhost:5000${image.url}`}
+                        src={`${import.meta.env.VITE_API_URL}${image.url}`}
                         alt={`Portfolio ${index + 1}`}
                         className="img-fluid rounded"
                         style={{ height: "200px", objectFit: "cover" }}
@@ -478,7 +478,7 @@ const VendorProfileViewOnly = () => {
                   style={{ width: "100px", height: "100px" }}
                 >
                   <img
-                    src={`http://localhost:5000/${vendorData.logo.replace(
+                    src={`${import.meta.env.VITE_API_URL}/${vendorData.logo.replace(
                       /\\/g,
                       "/"
                     )}`}

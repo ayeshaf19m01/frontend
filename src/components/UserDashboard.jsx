@@ -66,7 +66,7 @@ const UserDashboard = () => {
     const fetchServices = async () => {
       try {
         console.log("Fetching services...");
-        const response = await fetch("http://localhost:5000/api/services");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch services");
@@ -132,7 +132,7 @@ console.log("Sample service vendor data:", responseData.data[0]?.vendor);
 
   const fetchUserBookings = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/bookings", {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -146,7 +146,7 @@ console.log("Sample service vendor data:", responseData.data[0]?.vendor);
   const handleCancelBooking = async (bookingId) => {
     try {
       await axios.post(
-        `http://localhost:5000/api/bookings/${bookingId}`,
+        `${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}`,
         {},
         {
           headers: {
@@ -174,7 +174,7 @@ console.log("Sample service vendor data:", responseData.data[0]?.vendor);
 useEffect(() => {
   const fetchApprovedVendors = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/vendors?isApproved=true');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vendors?isApproved=true`);
       const data = await response.json();
       if (data.success) {
         const ids = data.data.map(vendor => vendor._id.toString());
@@ -246,7 +246,7 @@ useEffect(() => {
         bookingDate.setHours(10, 0, 0, 0);
   
         const response = await axios.post(
-          "http://localhost:5000/api/bookings",
+          `${import.meta.env.VITE_API_URL}/api/bookings`,
           {
             serviceId: selectedService._id,
             bookingDate: bookingDate.toISOString(),
@@ -516,7 +516,7 @@ useEffect(() => {
                                   <Carousel.Item key={index}>
                                     <Card.Img
                                       variant="top"
-                                      src={`http://localhost:5000${image.url}`}
+                                      src={`${import.meta.env.VITE_API_URL}${image.url}`}
                                       alt={`${service.name} - Image ${
                                         index + 1
                                       }`}

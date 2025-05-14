@@ -27,7 +27,7 @@ export const UserNotificationProvider = ({ children }) => {
     // Function to fetch notifications
     const fetchNotifications = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/notifications/${userId}/User`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notifications/${userId}/User`);
         if (!response.ok) throw new Error('Failed to fetch notifications');
         const data = await response.json();
         setNotifications(data);
@@ -79,7 +79,7 @@ export const UserNotificationProvider = ({ children }) => {
 
   const markAsRead = async (notificationId) => {
     try {
-      await fetch(`http://localhost:5000/api/notifications/mark-read/${notificationId}`, { method: 'PUT' });
+      await fetch(`${import.meta.env.VITE_API_URL}/api/notifications/mark-read/${notificationId}`, { method: 'PUT' });
       setUnreadCount(0);
       setNotifications((prev) =>
         prev.map((n) => ({ ...n, isRead: true }))

@@ -17,10 +17,10 @@ const VendorPackages = () => {
       try {
         const token = localStorage.getItem('token');
         const [servicesResponse, packagesResponse] = await Promise.all([
-          axios.get('http://localhost:5000/api/services/vendor', {
+          axios.get(`${import.meta.env.VITE_API_URL}/api/services/vendor`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          axios.get('http://localhost:5000/api/packages', {
+          axios.get(`${import.meta.env.VITE_API_URL}/api/packages`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
@@ -101,7 +101,7 @@ const VendorPackages = () => {
         vendor: JSON.parse(localStorage.getItem('vendor'))._id
       };
 
-      const response = await axios.post('http://localhost:5000/api/packages', payload, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/packages`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ const VendorPackages = () => {
   const handleDeletePackage = async (packageId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.delete(`http://localhost:5000/api/packages/${packageId}`, {
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/packages/${packageId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -340,7 +340,7 @@ const VendorPackages = () => {
                         <div className="d-flex align-items-center mb-2">
                           {service.imageUrl && (
                             <img 
-                              src={`http://localhost:5000${service.imageUrl}`}
+                              src={`${import.meta.env.VITE_API_URL}${service.imageUrl}`}
                               alt={service.name}
                               style={{ 
                                 width: '50px', 

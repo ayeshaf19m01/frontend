@@ -24,7 +24,7 @@ const VendorChatList = () => {
 
     const fetchChats = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/chat/vendor/${vendorId}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/chat/vendor/${vendorId}`);
         setChats(res.data);
       } catch (err) {
         console.error('Fetch error:', err);

@@ -11,7 +11,7 @@ const NotificationsDropdown = () => {
   const handleNotificationClick = async (notification) => {
     try {
       // Mark as read
-      const response = await fetch(`http://localhost:5000/api/notifications/mark-read/${notification._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notifications/mark-read/${notification._id}`, {
         method: 'PUT'
       });
       

@@ -8,7 +8,7 @@ const MyBookings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [bookings, setBookings] = useState([]);
-  const baseURL = 'http://localhost:5000'; // Base URL for images
+  // const baseURL = 'http://localhost:5000'; 
 
   useEffect(() => {
     fetchBookings();
@@ -16,7 +16,7 @@ const MyBookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/bookings', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -31,7 +31,7 @@ const MyBookings = () => {
             if (booking.type === 'service' && booking.service?._id && !booking.service?.images) {
               try {
                 const serviceResponse = await axios.get(
-                  `http://localhost:5000/api/services/${booking.service._id}`
+                  `${import.meta.env.VITE_API_URL}/api/services/${booking.service._id}`
                 );
                 return { ...booking, service: serviceResponse.data.data };
               } catch (err) {
@@ -41,7 +41,7 @@ const MyBookings = () => {
             } else if (booking.type === 'package' && booking.package?._id && !booking.package?.packageImages && !booking.package?.services?.every(s => s.imageUrl || s.images)) {
               try {
                 const packageResponse = await axios.get(
-                  `http://localhost:5000/api/packages/${booking.package._id}`
+                  `${import.meta.env.VITE_API_URL}/api/packages/${booking.package._id}`
                 );
                 return { ...booking, package: packageResponse.data.data };
               } catch (err) {
@@ -66,7 +66,7 @@ const MyBookings = () => {
 
   const handleCancelBooking = async (bookingId) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/bookings/${bookingId}`, {
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

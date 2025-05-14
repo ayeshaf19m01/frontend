@@ -19,7 +19,7 @@ export const NotificationProvider = ({ children }) => {
     // Function to fetch notifications
     const fetchNotifications = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/notifications/${vendorId}/Vendor`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notifications/${vendorId}/Vendor`);
         if (!response.ok) throw new Error('Failed to fetch notifications');
         const data = await response.json();
         setNotifications(data);
