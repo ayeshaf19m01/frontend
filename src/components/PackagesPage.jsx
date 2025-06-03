@@ -14,7 +14,7 @@ const PackagesPage = () => {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingMessage, setBookingMessage] = useState('');
   const [isBooking, setIsBooking] = useState(false);
-  // const baseURL = 'http://localhost:5000';
+ 
 
   const priceRanges = [
     { label: 'All Prices', min: 0, max: Infinity },
