@@ -8,7 +8,7 @@ const MyBookings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [bookings, setBookings] = useState([]);
-  // const baseURL = 'http://localhost:5000'; 
+  
 
   useEffect(() => {
     fetchBookings();
